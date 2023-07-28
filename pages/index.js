@@ -14,7 +14,8 @@ const Home = () => {
   const [test, setTest] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [mounted1, setMounted1] = useState(false);
+  const [mounted2, setMounted2] = useState(false);
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
@@ -27,7 +28,7 @@ const Home = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userInputLevel: formData.userInputLevel,
+        userInputAnswer: formData.userInputLevel,
         userInputType: formData.userInputType,
 
         userInputText: formData.userInputText,
@@ -40,6 +41,30 @@ const Home = () => {
 
     setTest(`${output}`);
     setIsGenerating(false);
+  };
+
+  const callFeedbackEndpoint = async () => {
+    // setIsGenerating(true);
+
+    console.log("Calling OpenAI...");
+
+    const response = await fetch("/api/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userInputAnswer: userAnswer,
+        test: test,
+      }),
+    });
+
+    const data = await response.json();
+    const { output } = data;
+    console.log("OpenAI replied...", output);
+
+    setFeedback(`${output}`);
+    // setIsGenerating(false);
   };
 
   const onFormSubmitTest = (event) => {
@@ -76,12 +101,20 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (mounted) {
+    if (mounted1) {
       callGenerateEndpoint();
     } else {
-      setMounted(true);
+      setMounted1(true);
     }
   }, [formData]);
+
+  useEffect(() => {
+    if (mounted2) {
+      callFeedbackEndpoint();
+    } else {
+      setMounted2(true);
+    }
+  }, userAnswer);
 
   return (
     <div className="root">
