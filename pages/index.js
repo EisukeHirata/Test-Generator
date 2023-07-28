@@ -6,13 +6,8 @@ inject();
 
 const Home = () => {
   const [formData, setFormData] = useState({
-    userInputAudience: "",
-    userInputFormality: "",
-
-    userInputVolume: "",
-    userInputLanguage: "",
-    userInputSimple: "",
-    userInputCompelling: "",
+    userInputLevel: "",
+    userInputType: "",
     userInputText: "",
   });
   const [apiOutput, setApiOutput] = useState("");
@@ -29,13 +24,9 @@ const Home = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userInputAudience: formData.userInputAudience,
-        userInputFormality: formData.userInputFormality,
+        userInputLevel: formData.userInputLevel,
+        userInputType: formData.userInputType,
 
-        userInputVolume: formData.userInputVolume,
-        userInputLanguage: formData.userInputLanguage,
-        userInputSimple: formData.userInputSimple,
-        userInputCompelling: formData.userInputCompelling,
         userInputText: formData.userInputText,
       }),
     });
@@ -50,24 +41,16 @@ const Home = () => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    const userInputAudience = event.target.userInputAudience.value;
-    const userInputFormality = event.target.userInputFormality.value;
+    const userInputLevel = event.target.userInputLevel.value;
+    const userInputType = event.target.userInputType.value;
 
-    const userInputVolume = event.target.userInputVolume.value;
-    const userInputLanguage = event.target.userInputLanguage.value;
-    const userInputSimple = event.target.userInputSimple.value;
-    const userInputCompelling = event.target.userInputCompelling.value;
     const userInputText = event.target.userInputText.value;
 
     const newFormData = {
       ...formData,
-      userInputAudience,
-      userInputFormality,
+      userInputLevel,
+      userInputType,
 
-      userInputVolume,
-      userInputLanguage,
-      userInputSimple,
-      userInputCompelling,
       userInputText,
     };
     console.log("TEXT " + newFormData.userInputText);
@@ -91,7 +74,7 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>GPT Rewriter</title>
+        <title>Tiimo</title>
       </Head>
       <div className="container max-w-4xl mx-auto px-4">
         <div className="p-12">
@@ -128,10 +111,10 @@ const Home = () => {
 
           <div className="header mt-10">
             <div className="header-title">
-              <h1 className="text-5xl">GPT Rewriter</h1>
+              <h1 className="text-5xl">Tiimo</h1>
             </div>
             <div className="header-subtitle">
-              <p className="text-xl">Rewrite your text as you like</p>
+              <p className="text-xl">AI Assistant for Test Prep</p>
             </div>
           </div>
 
@@ -141,7 +124,7 @@ const Home = () => {
                 for="message"
                 class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
               >
-                Your text
+                What kind of Test?
               </label>
               <textarea
                 id="InputText"
@@ -154,59 +137,59 @@ const Home = () => {
             <div className="md:flex items-center my-3">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Audience:
+                  Level:
                 </h3>
               </div>
               <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-audience-general"
+                      id="horizontal-list-radio-level-general"
                       type="radio"
-                      value="General"
-                      name="userInputAudience"
+                      value="Beginner"
+                      name="userInputLevel"
                       defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-audience-general"
+                      for="horizontal-list-radio-level-general"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      General{" "}
+                      Beginner{" "}
                     </label>
                   </div>
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-audience-knowledgeable"
+                      id="horizontal-list-radio-level-knowledgeable"
                       type="radio"
-                      value="Knowledgeable"
-                      name="userInputAudience"
+                      value="Intermediate"
+                      name="userInputLevel"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-audience-knowledgeable"
+                      for="horizontal-list-radio-level-knowledgeable"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Knowledgeable
+                      Intermediate
                     </label>
                   </div>
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-audience-expert"
+                      id="horizontal-list-radio-level-expert"
                       type="radio"
-                      value="Expert"
-                      name="userInputAudience"
+                      value="Advanced"
+                      name="userInputLevel"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-audience-expert"
+                      for="horizontal-list-radio-level-expert"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Expert
+                      Advanced
                     </label>
                   </div>
                 </li>
@@ -216,225 +199,59 @@ const Home = () => {
             <div className="md:flex items-center my-2">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Formality:
+                  Type:
                 </h3>
               </div>
               <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-formality-informal"
+                      id="horizontal-list-radio-type-informal"
                       type="radio"
-                      value="Informal"
-                      name="userInputFormality"
+                      value="Multiple Choice"
+                      name="userInputType"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-formality-informal"
+                      for="horizontal-list-radio-type-informal"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Informal{" "}
+                      Multiple Choice{" "}
                     </label>
                   </div>
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-formality-natural"
+                      id="horizontal-list-radio-type-natural"
                       type="radio"
-                      value="Natural"
-                      name="userInputFormality"
+                      value="Short Answer"
+                      name="userInputType"
                       defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-formality-natural"
+                      for="horizontal-list-radio-type-natural"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Natural
+                      Short Answer
                     </label>
                   </div>
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div class="flex items-center pl-3">
                     <input
-                      id="horizontal-list-radio-formality-formal"
+                      id="horizontal-list-radio-type-formal"
                       type="radio"
-                      value="Formal"
-                      name="userInputFormality"
+                      value="Essay"
+                      name="userInputType"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
-                      for="horizontal-list-radio-formality-formal"
+                      for="horizontal-list-radio-type-formal"
                       class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Formal
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="md:flex items-center my-3">
-              <div className="mr-4 w-48">
-                <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Volume:
-                </h3>
-              </div>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-volume-general"
-                      type="radio"
-                      value="General"
-                      name="userInputVolume"
-                      defaultChecked
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-volume-general"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      General{" "}
-                    </label>
-                  </div>
-                </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-volume-twitter"
-                      type="radio"
-                      value="Twitter"
-                      name="userInputVolume"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-volume-twitter"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Twitter
-                    </label>
-                  </div>
-                </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-volume-mail"
-                      type="radio"
-                      value="Mail"
-                      name="userInputVolume"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-volume-mail"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Mail
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="md:flex items-center my-3">
-              <div className="mr-4 w-48">
-                <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Language:
-                </h3>
-              </div>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-license"
-                      type="radio"
-                      value="English"
-                      name="userInputLanguage"
-                      defaultChecked
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-license"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      English{" "}
-                    </label>
-                  </div>
-                </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-id"
-                      type="radio"
-                      value="Japanese"
-                      name="userInputLanguage"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-id"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Japanese
-                    </label>
-                  </div>
-                </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="horizontal-list-radio-millitary"
-                      type="radio"
-                      value="Spanish"
-                      name="userInputLanguage"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="horizontal-list-radio-millitary"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Spanish
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="md:flex items-center my-2">
-              <div className="mr-4 w-48">
-                <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Others
-                </h3>
-              </div>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="vue-checkbox-list"
-                      type="checkbox"
-                      value="Simple"
-                      name="userInputSimple"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="vue-checkbox-list"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Simple
-                    </label>
-                  </div>
-                </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                    <input
-                      id="react-checkbox-list"
-                      type="checkbox"
-                      value="Compelling"
-                      name="userInputCompelling"
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      for="react-checkbox-list"
-                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Compelling
+                      Essay
                     </label>
                   </div>
                 </li>
@@ -449,7 +266,7 @@ const Home = () => {
                 type="submit"
                 class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Rewrite
+                Generate
               </button>
             </div>
           </form>
