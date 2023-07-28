@@ -10,7 +10,8 @@ const Home = () => {
     userInputType: "",
     userInputText: "",
   });
-  const [apiOutput, setApiOutput] = useState("");
+  const [test, setTest] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [mounted, setMounted] = useState(false);
   const callGenerateEndpoint = async () => {
@@ -35,11 +36,11 @@ const Home = () => {
     const { output } = data;
     console.log("OpenAI replied...", output);
 
-    setApiOutput(`${output}`);
+    setTest(`${output}`);
     setIsGenerating(false);
   };
 
-  const onFormSubmit = (event) => {
+  const onFormSubmitTest = (event) => {
     event.preventDefault();
     const userInputLevel = event.target.userInputLevel.value;
     const userInputType = event.target.userInputType.value;
@@ -60,7 +61,7 @@ const Home = () => {
     // callGenerateEndpoint();
   };
   const handleCopy = () => {
-    navigator.clipboard.writeText(apiOutput);
+    navigator.clipboard.writeText(test);
   };
 
   useEffect(() => {
@@ -118,7 +119,7 @@ const Home = () => {
             </div>
           </div>
 
-          <form onSubmit={onFormSubmit}>
+          <form onSubmit={onFormSubmitTest}>
             <div className="mt-8">
               <label
                 for="message"
@@ -266,11 +267,11 @@ const Home = () => {
                 type="submit"
                 class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Generate
+                Generate Test
               </button>
             </div>
           </form>
-          {apiOutput && (
+          {test && (
             <div className="output">
               <div className="output-header-container">
                 <div className="output-header">
@@ -282,8 +283,8 @@ const Home = () => {
                   class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   id="text-to-copy"
                   rows="6"
-                  value={apiOutput}
-                  onChange={(event) => setApiOutput(event.target.value)}
+                  value={test}
+                  onChange={(event) => setTest(event.target.value)}
                 ></textarea>
                 <div className="my-4 text-right">
                   <button
@@ -295,6 +296,35 @@ const Home = () => {
                   </button>
                 </div>
               </div>
+              <form onSubmit={onFormSubmitTest}>
+                <div className="mt-8">
+                  <label
+                    for="message"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+                  >
+                    Your Answer
+                  </label>
+                  <textarea
+                    id="InputText"
+                    rows="4"
+                    name="userInputText"
+                    class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Write your answer here..."
+                  ></textarea>
+                </div>
+
+                <div
+                  className="my-4 text-right
+          "
+                >
+                  <button
+                    type="submit"
+                    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  >
+                    Generate Feedback
+                  </button>
+                </div>
+              </form>
             </div>
           )}
         </div>
