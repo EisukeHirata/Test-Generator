@@ -10,10 +10,12 @@ const Home = () => {
     userInputType: "",
     userInputText: "",
   });
+  const [userAnswer, setUserAnswer] = useState("");
   const [test, setTest] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [mounted, setMounted] = useState(false);
+
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
 
@@ -58,6 +60,15 @@ const Home = () => {
     setFormData(newFormData);
     console.log("TEXT1 " + formData.userInputText);
 
+    // callGenerateEndpoint();
+  };
+  const onFormSubmitAnswer = (event) => {
+    event.preventDefault();
+    const userInputAnswer = event.target.userInputAnswer.value;
+
+    console.log("Answer TEXT :" + userInputAnswer);
+    setUserAnswer(userInputAnswer);
+    console.log("AnswerTEXT1 :" + userAnswer);
     // callGenerateEndpoint();
   };
   const handleCopy = () => {
@@ -296,7 +307,7 @@ const Home = () => {
                   </button>
                 </div>
               </div>
-              <form onSubmit={onFormSubmitTest}>
+              <form onSubmit={onFormSubmitAnswer}>
                 <div className="mt-8">
                   <label
                     for="message"
@@ -305,9 +316,9 @@ const Home = () => {
                     Your Answer
                   </label>
                   <textarea
-                    id="InputText"
+                    id="InputAnswer"
                     rows="4"
-                    name="userInputText"
+                    name="userInputAnswer"
                     class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write your answer here..."
                   ></textarea>
