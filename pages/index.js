@@ -46,7 +46,7 @@ const Home = () => {
   const callFeedbackEndpoint = async () => {
     // setIsGenerating(true);
 
-    console.log("Calling OpenAI...");
+    console.log("Feedback Calling OpenAI...");
 
     const response = await fetch("/api/feedback", {
       method: "POST",
@@ -114,7 +114,7 @@ const Home = () => {
     } else {
       setMounted2(true);
     }
-  }, userAnswer);
+  }, [userAnswer]);
 
   return (
     <div className="root">
@@ -330,7 +330,7 @@ const Home = () => {
                   value={test}
                   onChange={(event) => setTest(event.target.value)}
                 ></textarea>
-                <div className="my-4 text-right">
+                {/*<div className="my-4 text-right">
                   <button
                     type="button"
                     class="  text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
@@ -338,7 +338,7 @@ const Home = () => {
                   >
                     Copy
                   </button>
-                </div>
+          </div>*/}
               </div>
               <form onSubmit={onFormSubmitAnswer}>
                 <div className="mt-8">
@@ -369,6 +369,19 @@ const Home = () => {
                   </button>
                 </div>
               </form>
+              {feedback && (
+                <div>
+                  <label
+                    for="message"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+                  >
+                    Feedback
+                  </label>
+                  <div class="block p-2.5 pb-10 w-full text-sm text-gray-900">
+                    {feedback}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

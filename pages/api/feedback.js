@@ -7,40 +7,30 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 const basePromptPrefix = `
 
-Please generate a personalized test based on the following parameters:
+Please review and give feedback of user's answer to quiz based on the following parameters:
 The reply will only be the test text, no explanation of it.
 `;
 
-const generateAction = async (req, res) => {
-  const {
-    userInputLevel,
-    userInputType,
-    userInputDomain,
-
-    userInputText,
-  } = req.body;
+const feedbackAction = async (req, res) => {
+  const { userInputAnswer, test } = req.body;
   console.log(`API: ${basePromptPrefix}
-  ${req.body.userInputLevel}
-  ${req.body.userInputType}
+  ${req.body.userInputAnswer}
+  ${req.body.test}
   
 
-  ${req.body.userInputText}`);
+  `);
 
   const baseCompletion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
-      { role: "system", content: "Behave like a test generation system" },
+      { role: "system", content: "Behave like a feedback system" },
       {
         role: "user",
         content: `${basePromptPrefix}
+        Test:${req.body.test},
+        User's Answer : ${req.body.userInputAnswer}
 
-        What kind of Test? : ${req.body.userInputText}
 
-
-        Style:
-        Difficulty Level:${req.body.userInputLevel},
-        Type of Questions:${req.body.userInputType},
-      
 
        
         `,
@@ -55,4 +45,4 @@ const generateAction = async (req, res) => {
   res.status(200).json({ output: basePromptOutput, status: 200 });
 };
 
-export default generateAction;
+export default feedbackAction;
